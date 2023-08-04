@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ZConnection, ZDataset, fphttpclient, opensslsockets, DB, DateUtils;
+  ZConnection, ZDataset, fphttpclient, opensslsockets, DB, DateUtils, Unit3;
 
 type
 
@@ -20,6 +20,7 @@ type
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
+    Edit1: TEdit;
     Image1: TImage;
     Label1: TLabel;
     Label2: TLabel;
@@ -34,14 +35,18 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     PanelMaiorValor: TPanel;
+    QueryBancoKotacaocaminhobanco: TStringField;
     QueryCotacaoValor: TCurrencyField;
     ZConnection1: TZConnection;
     QueryCotacao: TZQuery;
+    ZConnection2: TZConnection;
+    QueryBancoKotacao: TZQuery;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -174,6 +179,21 @@ begin
 
 end;
 
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+
+
+    // Criar e exibir o novo formulário
+    Form3 := TForm3.Create(Self); // Criação do novo formulário
+  try
+    Form3.ShowModal; // Exibição do novo formulário como modal (bloqueia o formulário principal até que o novo formulário seja fechado)
+  finally
+    Form3.Free; // Liberar a memória após fechar o novo formulário
+  end;
+
+
+end;
+
 procedure TForm1.FormActivate(Sender: TObject);
 var ResponseLocal: String;
     ResponseData: String;
@@ -183,6 +203,7 @@ var ResponseLocal: String;
     ValorDolar: Currency;
     data: TDateTime;
     horario: TTime;
+    ultimocaminhobanco: String;
 
 begin
 
@@ -191,6 +212,35 @@ begin
    data := Now;
    horario := TimeOf(data);
 
+     //------------------------------ Tratar disso depois--------------------------------------------//
+//Conexão com o banco local 'Kotacao.gdl', no caso, como ele é predefinido, é OBRIGATÓRIO que o banco Kotacao.gdl esteja na mesma pasta do executável
+   //QueryBancoKotacao.Connection := ZConnection2;
+
+  // try
+
+  // QueryBancoKotacao.SQL.Text := 'SELECT FIRST 1 CAMINHOBANCO FROM CONFIGURACAO ORDER BY ID DESC';
+  // QueryBancoKotacao.Open;
+    {
+     if not QueryBancoKotacao.IsEmpty then
+    begin
+      // Acessar o valor do campo e armazená-lo na variável MeuResultado
+      ultimocaminhobanco:= QueryBancoKotacao.FieldByName('CAMINHOBANCO').AsString;
+      Edit1.Text := ultimocaminhobanco;
+    end
+    else
+    begin
+      // Tratar o caso em que não há resultados
+      // Por exemplo, atribuir um valor padrão à variável
+      ultimocaminhobanco := 'C:\Users\pedro\OneDrive\Documentos\Kotacoes\KOTACAO.GDL'; // Valor padrão, caso não haja resultados
+    end;
+
+
+
+   finally
+   end;
+
+
+   } //------------------------Tratar disso depois---------------------------------------------------//
 
    LabelAtualizado.Caption := 'Atualizado em Tempo Real às: ' + TimeToStr(horario);
 

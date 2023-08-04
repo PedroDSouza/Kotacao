@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 905
+  Left = 3063
   Height = 407
-  Top = 194
+  Top = 159
   Width = 613
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
@@ -538,6 +538,50 @@ object Form1: TForm1
   Position = poScreenCenter
   ShowInTaskBar = stAlways
   LCLVersion = '2.2.6.0'
+  object PanelMaiorValor: TPanel
+    Left = 320
+    Height = 180
+    Top = 25
+    Width = 253
+    BevelOuter = bvLowered
+    ClientHeight = 180
+    ClientWidth = 253
+    Color = clInactiveBorder
+    ParentColor = False
+    TabOrder = 6
+    object ListaMaiorValor: TListBox
+      Left = 8
+      Height = 65
+      Top = 32
+      Width = 235
+      Items.Strings = (
+        'Dólar | Maior Valor: '
+        'Ouro | Maior Valor: '
+      )
+      ItemHeight = 20
+      TabOrder = 0
+    end
+    object Label5: TLabel
+      Left = 8
+      Height = 20
+      Top = 8
+      Width = 111
+      Caption = 'Valor atualizado:'
+      ParentColor = False
+    end
+    object ListaMaiorValor1: TListBox
+      Left = 8
+      Height = 65
+      Top = 104
+      Width = 235
+      Enabled = False
+      Items.Strings = (
+        'Ouro: 0.000'
+      )
+      ItemHeight = 20
+      TabOrder = 1
+    end
+  end
   object Panel1: TPanel
     Left = 32
     Height = 240
@@ -639,6 +683,7 @@ object Form1: TForm1
       Top = 40
       Width = 216
       Caption = 'Conexão com o Sistema'
+      OnClick = Button7Click
       TabOrder = 3
     end
     object Label1: TLabel
@@ -656,7 +701,6 @@ object Form1: TForm1
     Top = 352
     Width = 192
     Caption = 'Abrir Opções'
-    Enabled = False
     OnClick = Button6Click
     TabOrder = 4
   end
@@ -943,50 +987,6 @@ object Form1: TForm1
     Caption = 'Atualizado em Tempo Real às:'
     ParentColor = False
   end
-  object PanelMaiorValor: TPanel
-    Left = 320
-    Height = 180
-    Top = 25
-    Width = 253
-    BevelOuter = bvLowered
-    ClientHeight = 180
-    ClientWidth = 253
-    Color = clInactiveBorder
-    ParentColor = False
-    TabOrder = 6
-    object ListaMaiorValor: TListBox
-      Left = 8
-      Height = 65
-      Top = 32
-      Width = 235
-      Items.Strings = (
-        'Dólar | Maior Valor: '
-        'Ouro | Maior Valor: '
-      )
-      ItemHeight = 20
-      TabOrder = 0
-    end
-    object Label5: TLabel
-      Left = 8
-      Height = 20
-      Top = 8
-      Width = 111
-      Caption = 'Valor atualizado:'
-      ParentColor = False
-    end
-    object ListaMaiorValor1: TListBox
-      Left = 8
-      Height = 65
-      Top = 104
-      Width = 235
-      Enabled = False
-      Items.Strings = (
-        'Ouro: 0.000'
-      )
-      ItemHeight = 20
-      TabOrder = 1
-    end
-  end
   object ZConnection1: TZConnection
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = True
@@ -1018,6 +1018,38 @@ object Form1: TForm1
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+    end
+  end
+  object ZConnection2: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = True
+    Properties.Strings = (
+      'AutoEncodeStrings=True'
+      'controls_cp=CP_UTF8'
+    )
+    HostName = 'localhost'
+    Port = 0
+    Database = 'C:\Users\pedro\OneDrive\Documentos\Kotacoes\KOTACAO.GDL'
+    User = 'sysdba'
+    Password = 'masterkey'
+    Protocol = 'firebird-2.5'
+    LibraryLocation = 'C:\Users\pedro\OneDrive\Documentos\Kotacoes\fbclient.dll'
+    Left = 272
+    Top = 320
+  end
+  object QueryBancoKotacao: TZQuery
+    Params = <>
+    Left = 320
+    Top = 264
+    object QueryBancoKotacaocaminhobanco: TStringField
+      FieldKind = fkData
+      FieldName = 'caminhobanco'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
     end
   end
 end

@@ -1,14 +1,13 @@
-object Form1: TForm1
-  Left = 3063
-  Height = 407
-  Top = 159
-  Width = 613
+object Form3: TForm3
+  Left = 2782
+  Height = 417
+  Top = 187
+  Width = 1053
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Cotações do Dia'
-  ClientHeight = 407
-  ClientWidth = 613
-  Color = clMoneyGreen
+  Caption = 'Conexão com o Sistema'
+  ClientHeight = 417
+  ClientWidth = 1053
   DesignTimePPI = 120
   Icon.Data = {
     FD4000000000010001000000000001002000E74000001600000089504E470D0A
@@ -533,199 +532,48 @@ object Form1: TForm1
     D1749DFD883D46F04E8DE7FF009751705FF830E6220000000049454E44AE4260
     82
   }
-  OnActivate = FormActivate
-  OnCreate = FormCreate
   Position = poScreenCenter
-  ShowInTaskBar = stAlways
   LCLVersion = '2.2.6.0'
-  object PanelMaiorValor: TPanel
-    Left = 320
-    Height = 180
-    Top = 25
-    Width = 253
-    BevelOuter = bvLowered
-    ClientHeight = 180
-    ClientWidth = 253
-    Color = clInactiveBorder
-    ParentColor = False
-    TabOrder = 6
-    object ListaMaiorValor: TListBox
-      Left = 8
-      Height = 65
-      Top = 32
-      Width = 235
-      Items.Strings = (
-        'Dólar | Maior Valor: '
-        'Ouro | Maior Valor: '
-      )
-      ItemHeight = 20
-      TabOrder = 0
-    end
-    object Label5: TLabel
-      Left = 8
-      Height = 20
-      Top = 8
-      Width = 111
-      Caption = 'Valor atualizado:'
-      ParentColor = False
-    end
-    object ListaMaiorValor1: TListBox
-      Left = 8
-      Height = 65
-      Top = 104
-      Width = 235
-      Enabled = False
-      Items.Strings = (
-        'Ouro: 0.000'
-      )
-      ItemHeight = 20
-      TabOrder = 1
-    end
-  end
-  object Panel1: TPanel
-    Left = 32
-    Height = 240
-    Top = 24
-    Width = 194
-    ClientHeight = 240
-    ClientWidth = 194
-    ParentColor = False
+  object PanelConfiguracoes: TPanel
+    Left = 23
+    Height = 96
+    Top = 32
+    Width = 817
+    ClientHeight = 96
+    ClientWidth = 817
     TabOrder = 0
-    object ListaMoedas: TListBox
-      Left = 14
-      Height = 196
-      Top = 34
-      Width = 72
-      Items.Strings = (
-        'Dólar'
-      )
-      ItemHeight = 20
-      TabOrder = 0
-    end
-    object ListaPreco: TListBox
-      Left = 96
-      Height = 197
-      Top = 34
-      Width = 80
-      ItemHeight = 0
-      TabOrder = 1
-    end
-    object Label4: TLabel
-      Left = 6
-      Height = 20
-      Top = 4
-      Width = 116
-      Caption = 'Maior Valor Hoje:'
-      ParentColor = False
-    end
-  end
-  object Button1: TButton
-    Left = 32
-    Height = 31
-    Top = 312
-    Width = 192
-    Caption = 'Enviar Maior Valor ao BD'
-    OnClick = Button1Click
-    TabOrder = 1
-  end
-  object Button2: TButton
-    Left = 32
-    Height = 31
-    Top = 272
-    Width = 194
-    Caption = 'Recarregar Valores'
-    OnClick = Button2Click
-    TabOrder = 2
-  end
-  object Panel2: TPanel
-    Left = 320
-    Height = 176
-    Top = 24
-    Width = 253
-    ClientHeight = 176
-    ClientWidth = 253
-    ParentColor = False
-    TabOrder = 3
-    Visible = False
-    object Button3: TButton
-      Left = 16
-      Height = 31
-      Top = 80
-      Width = 216
-      Caption = 'Cadastrar Moedas'
-      Enabled = False
-      TabOrder = 0
-    end
-    object Button5: TButton
-      Left = 219
-      Height = 31
-      Top = 1
-      Width = 30
-      Caption = 'X'
-      Color = clMaroon
-      Font.Color = clMaroon
-      OnClick = Button5Click
-      ParentFont = False
-      TabOrder = 1
-    end
-    object Button4: TButton
-      Left = 16
-      Height = 31
-      Top = 120
-      Width = 216
-      Caption = 'Sobre o Sistema'
-      OnClick = Button4Click
-      TabOrder = 2
-    end
-    object Button7: TButton
-      Left = 16
-      Height = 31
-      Top = 40
-      Width = 216
-      Caption = 'Conexão com o Sistema'
-      OnClick = Button7Click
-      TabOrder = 3
-    end
     object Label1: TLabel
       Left = 8
       Height = 20
       Top = 8
-      Width = 50
-      Caption = 'Opções'
+      Width = 334
+      Caption = 'Caminho do Banco de Dados do Sistema Kotação:'
       ParentColor = False
     end
-  end
-  object Button6: TButton
-    Left = 32
-    Height = 31
-    Top = 352
-    Width = 192
-    Caption = 'Abrir Opções'
-    OnClick = Button6Click
-    TabOrder = 4
-  end
-  object Memo1: TMemo
-    Left = 520
-    Height = 65
-    Top = 208
-    Width = 77
-    TabOrder = 5
-    Visible = False
-  end
-  object Label2: TLabel
-    Left = 216
-    Height = 20
-    Top = 280
-    Width = 44
-    Caption = 'Label2'
-    ParentColor = False
-    Visible = False
+    object edCaminhoBanco: TEdit
+      Left = 8
+      Height = 28
+      Top = 40
+      Width = 724
+      TabOrder = 0
+      TextHint = 'Insira o caminho do banco de dados que deseja conectar'
+    end
+    object btGravar: TBitBtn
+      Left = 736
+      Height = 30
+      Top = 40
+      Width = 64
+      Caption = 'Gravar'
+      Enabled = False
+      OnClick = btGravarClick
+      TabOrder = 1
+    end
   end
   object Image1: TImage
-    Left = 384
-    Height = 120
-    Top = 248
-    Width = 126
+    Left = 872
+    Height = 128
+    Top = 256
+    Width = 121
     Picture.Data = {
       1754506F727461626C654E6574776F726B477261706869631C1F000089504E47
       0D0A1A0A0000000D4948445200000078000000780806000000396436D2000000
@@ -979,22 +827,6 @@ object Form1: TForm1
       636170652E6F72679BEE3C1A0000000049454E44AE426082
     }
   end
-  object LabelAtualizado: TLabel
-    Left = 312
-    Height = 20
-    Top = 384
-    Width = 201
-    Caption = 'Atualizado em Tempo Real às:'
-    ParentColor = False
-  end
-  object Edit1: TEdit
-    Left = 240
-    Height = 28
-    Top = 232
-    Width = 100
-    TabOrder = 7
-    Text = 'Edit1'
-  end
   object ZConnection1: TZConnection
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = True
@@ -1005,53 +837,22 @@ object Form1: TForm1
     Connected = True
     HostName = 'localhost'
     Port = 0
-    Database = 'C:\Loureiro\Klavix\Bancos\Loja\loja.gdl'
-    User = 'sysdba'
-    Password = 'masterkey'
-    Protocol = 'firebird-2.5'
-    LibraryLocation = 'C:\Users\pedro\OneDrive\Documentos\Kotacoes\fbclient.dll'
-    Left = 256
-    Top = 32
-  end
-  object QueryCotacao: TZQuery
-    Connection = ZConnection1
-    Params = <>
-    Left = 256
-    Top = 136
-    object QueryCotacaoValor: TCurrencyField
-      FieldKind = fkData
-      FieldName = 'Valor'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-  end
-  object ZConnection2: TZConnection
-    ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = True
-    Properties.Strings = (
-      'AutoEncodeStrings=True'
-      'controls_cp=CP_UTF8'
-    )
-    HostName = 'localhost'
-    Port = 0
     Database = 'C:\Users\pedro\OneDrive\Documentos\Kotacoes\KOTACAO.GDL'
     User = 'sysdba'
     Password = 'masterkey'
-    Protocol = 'firebird-2.5'
+    Protocol = 'firebirdd-2.5'
     LibraryLocation = 'C:\Users\pedro\OneDrive\Documentos\Kotacoes\fbclient.dll'
-    Left = 272
-    Top = 320
+    Left = 924
+    Top = 48
   end
-  object QueryBancoKotacao: TZQuery
+  object ZQuery1: TZQuery
+    Connection = ZConnection1
     Params = <>
-    Left = 320
-    Top = 264
-    object QueryBancoKotacaocaminhobanco: TStringField
+    Left = 924
+    Top = 120
+    object ZQuery1CAMINHOBANCO: TStringField
       FieldKind = fkData
-      FieldName = 'caminhobanco'
+      FieldName = 'CAMINHOBANCO'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
