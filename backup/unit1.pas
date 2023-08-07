@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ZConnection, ZDataset, fphttpclient, opensslsockets, DB, DateUtils, Unit3;
+  IdHTTP, ZConnection, ZDataset, fphttpclient, opensslsockets, DB, DateUtils,
+  Unit3;
 
 type
 
@@ -20,7 +21,7 @@ type
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
-    Edit1: TEdit;
+    IdHTTP1: TIdHTTP;
     Image1: TImage;
     Label1: TLabel;
     Label2: TLabel;
@@ -49,6 +50,7 @@ type
     procedure Button7Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ListaMoedasClick(Sender: TObject);
   private
 
   public
@@ -135,6 +137,13 @@ var ResponseLocal: String;
     data: TDateTime;
     horario: TTime;
 
+    URL: String;
+    PosValor: Integer;
+    CotacaoOuroString: String;
+    CotacaoOuroConversao: String;
+    HTTP: TIdHTTP;
+    CotacaoOuroConvertido: String;
+
 begin
 
    FazerRequisicaoHTTP;
@@ -151,9 +160,41 @@ begin
    ValorStr := Copy(ResponseLocal, (Pos('"high"',ResponseLocal) + 8), 6);
    ValorDolar := StrToFloat(StringReplace(ValorStr, '.', ',', []));
 
+//----------------------------------------------------------------------
+  URL  := 'https://www.google.com/search?q=cota%C3%A7%C3%A3o+ouro+18k&biw=1536&bih=731&sxsrf=AB5stBgkONaKAThN7bLnA3TDsQzVf038vw%3A1691361805104&ei=DSLQZNj7BenT5OUPvZS70AY&oq=Cota%C3%A7%C3%A3o+do+Ouro&gs_lp=Egxnd3Mtd2l6LXNlcnAiEUNvdGHDp8OjbyBkbyBPdXJvKgIIATIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYigUYsAMYQzIKEAAYigUYsAMYQ0jEC1AAWABwAXgBkAEAmAEAoAEAqgEAuAEByAEA4gMEGAAgQYgGAZAGCg&sclient=gws-wiz-serp';
+  HTTP := TIdHTTP.Create(nil);
+
+try
+   try
+
+  Memo1.Text := HTTP.Get(URL);
+  PosValor   := Pos('R$ ',  HTTP.Get(URL));
+  CotacaoOuroString := Copy(HTTP.Get(URL), PosValor + 3, 6);
+
+
+  except
+  on E: Exception do
+
+    ShowMessage('Erro ao obter a página: ' + E.Message);
+
+  end;
+finally
+
+  HTTP.Free;
+
+end;
+
+  ListaPreco.Items.Add(CotacaoOuroString);
+  //ListaMaiorValor1.Items.Add('Ouro: ' + CotacaoOuroString);
+
+
+
+//----------------------------------------------------------------------
+
 
    ListaPreco.Items.Clear;
    ListaPreco.Items.Add(FloatToStr(ValorDolar));
+   ListaPreco.Items.Add(CotacaoOuroString);
    ValorDolarUniv :=  ValorDolar;
 
    ResponseMaiorValor := Resposta;
@@ -204,13 +245,45 @@ var ResponseLocal: String;
     data: TDateTime;
     horario: TTime;
     ultimocaminhobanco: String;
+    URL: String;
+    PosValor: Integer;
+    CotacaoOuroString: String;
+    CotacaoOuroConversao: String;
+    HTTP: TIdHTTP;
+
 
 begin
+
 
    FazerRequisicaoHTTP;
 
    data := Now;
    horario := TimeOf(data);
+
+//--------------------------------------------------------//
+  URL  := 'https://www.google.com/search?q=cota%C3%A7%C3%A3o+ouro+18k&biw=1536&bih=731&sxsrf=AB5stBgkONaKAThN7bLnA3TDsQzVf038vw%3A1691361805104&ei=DSLQZNj7BenT5OUPvZS70AY&oq=Cota%C3%A7%C3%A3o+do+Ouro&gs_lp=Egxnd3Mtd2l6LXNlcnAiEUNvdGHDp8OjbyBkbyBPdXJvKgIIATIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYigUYsAMYQzIKEAAYigUYsAMYQ0jEC1AAWABwAXgBkAEAmAEAoAEAqgEAuAEByAEA4gMEGAAgQYgGAZAGCg&sclient=gws-wiz-serp';
+  HTTP := TIdHTTP.Create(nil);
+
+try
+   try
+
+  Memo1.Text := HTTP.Get(URL);
+  PosValor   := Pos('R$ ',  HTTP.Get(URL));
+  CotacaoOuroString := Copy(HTTP.Get(URL), PosValor + 3, 6);
+
+  except
+  on E: Exception do
+
+    ShowMessage('Erro ao obter a página: ' + E.Message);
+
+  end;
+finally
+
+  HTTP.Free;
+
+end;
+
+//--------------------------------------------------------------------------------
 
      //------------------------------ Tratar disso depois--------------------------------------------//
 //Conexão com o banco local 'Kotacao.gdl', no caso, como ele é predefinido, é OBRIGATÓRIO que o banco Kotacao.gdl esteja na mesma pasta do executável
@@ -265,6 +338,9 @@ begin
 
 
    ListaPreco.Items.Add(FloatToStr(ValorDolar));
+
+   ListaMaiorValor1.Items.Add('Ouro: ' + CotacaoOuroString);
+   ListaPreco.Items.Add(CotacaoOuroString);
    ValorDolarUniv :=  ValorDolar;
    DataDolarUniv  := StrData;
 
@@ -280,6 +356,7 @@ begin
 
 
 end;
+
 
 
 

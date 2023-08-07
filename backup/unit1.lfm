@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 3063
+  Left = 1080
   Height = 407
-  Top = 159
+  Top = 93
   Width = 613
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
@@ -538,105 +538,6 @@ object Form1: TForm1
   Position = poScreenCenter
   ShowInTaskBar = stAlways
   LCLVersion = '2.2.6.0'
-  object PanelMaiorValor: TPanel
-    Left = 320
-    Height = 180
-    Top = 25
-    Width = 253
-    BevelOuter = bvLowered
-    ClientHeight = 180
-    ClientWidth = 253
-    Color = clInactiveBorder
-    ParentColor = False
-    TabOrder = 6
-    object ListaMaiorValor: TListBox
-      Left = 8
-      Height = 65
-      Top = 32
-      Width = 235
-      Items.Strings = (
-        'Dólar | Maior Valor: '
-        'Ouro | Maior Valor: '
-      )
-      ItemHeight = 20
-      TabOrder = 0
-    end
-    object Label5: TLabel
-      Left = 8
-      Height = 20
-      Top = 8
-      Width = 111
-      Caption = 'Valor atualizado:'
-      ParentColor = False
-    end
-    object ListaMaiorValor1: TListBox
-      Left = 8
-      Height = 65
-      Top = 104
-      Width = 235
-      Enabled = False
-      Items.Strings = (
-        'Ouro: 0.000'
-      )
-      ItemHeight = 20
-      TabOrder = 1
-    end
-  end
-  object Panel1: TPanel
-    Left = 32
-    Height = 240
-    Top = 24
-    Width = 194
-    ClientHeight = 240
-    ClientWidth = 194
-    ParentColor = False
-    TabOrder = 0
-    object ListaMoedas: TListBox
-      Left = 14
-      Height = 196
-      Top = 34
-      Width = 72
-      Items.Strings = (
-        'Dólar'
-      )
-      ItemHeight = 20
-      TabOrder = 0
-    end
-    object ListaPreco: TListBox
-      Left = 96
-      Height = 197
-      Top = 34
-      Width = 80
-      ItemHeight = 0
-      TabOrder = 1
-    end
-    object Label4: TLabel
-      Left = 6
-      Height = 20
-      Top = 4
-      Width = 116
-      Caption = 'Maior Valor Hoje:'
-      ParentColor = False
-    end
-  end
-  object Button1: TButton
-    Left = 32
-    Height = 31
-    Top = 312
-    Width = 192
-    Caption = 'Enviar Maior Valor ao BD'
-    OnClick = Button1Click
-    TabOrder = 1
-  end
-  object Button2: TButton
-    Left = 32
-    Height = 31
-    Top = 272
-    Width = 194
-    Caption = 'Recarregar Valores'
-    OnClick = Button2Click
-    TabOrder = 2
-  end
   object Panel2: TPanel
     Left = 320
     Height = 176
@@ -694,6 +595,103 @@ object Form1: TForm1
       Caption = 'Opções'
       ParentColor = False
     end
+  end
+  object PanelMaiorValor: TPanel
+    Left = 320
+    Height = 180
+    Top = 25
+    Width = 253
+    BevelOuter = bvLowered
+    ClientHeight = 180
+    ClientWidth = 253
+    Color = clInactiveBorder
+    ParentColor = False
+    TabOrder = 6
+    object ListaMaiorValor: TListBox
+      Left = 8
+      Height = 65
+      Top = 32
+      Width = 235
+      Items.Strings = (
+        'Dólar | Maior Valor: '
+        'Ouro | Maior Valor: '
+      )
+      ItemHeight = 20
+      TabOrder = 0
+    end
+    object Label5: TLabel
+      Left = 8
+      Height = 20
+      Top = 8
+      Width = 111
+      Caption = 'Valor atualizado:'
+      ParentColor = False
+    end
+    object ListaMaiorValor1: TListBox
+      Left = 8
+      Height = 65
+      Top = 104
+      Width = 235
+      ItemHeight = 0
+      TabOrder = 1
+    end
+  end
+  object Panel1: TPanel
+    Left = 32
+    Height = 240
+    Top = 24
+    Width = 194
+    ClientHeight = 240
+    ClientWidth = 194
+    ParentColor = False
+    TabOrder = 0
+    object ListaMoedas: TListBox
+      Left = 14
+      Height = 196
+      Top = 34
+      Width = 72
+      Items.Strings = (
+        'Dólar'
+        'Ouro'
+      )
+      ItemHeight = 20
+      OnClick = ListaMoedasClick
+      TabOrder = 0
+    end
+    object ListaPreco: TListBox
+      Left = 96
+      Height = 197
+      Top = 34
+      Width = 80
+      ItemHeight = 0
+      TabOrder = 1
+    end
+    object Label4: TLabel
+      Left = 6
+      Height = 20
+      Top = 4
+      Width = 116
+      Caption = 'Maior Valor Hoje:'
+      ParentColor = False
+    end
+  end
+  object Button1: TButton
+    Left = 32
+    Height = 31
+    Top = 312
+    Width = 192
+    Caption = 'Enviar Maior Valor ao BD'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 32
+    Height = 31
+    Top = 272
+    Width = 194
+    Caption = 'Recarregar Valores'
+    OnClick = Button2Click
+    TabOrder = 2
   end
   object Button6: TButton
     Left = 32
@@ -987,14 +985,6 @@ object Form1: TForm1
     Caption = 'Atualizado em Tempo Real às:'
     ParentColor = False
   end
-  object Edit1: TEdit
-    Left = 240
-    Height = 28
-    Top = 232
-    Width = 100
-    TabOrder = 7
-    Text = 'Edit1'
-  end
   object ZConnection1: TZConnection
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = True
@@ -1059,5 +1049,21 @@ object Form1: TForm1
       Required = False
       Size = 250
     end
+  end
+  object IdHTTP1: TIdHTTP
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 256
+    Top = 216
   end
 end
